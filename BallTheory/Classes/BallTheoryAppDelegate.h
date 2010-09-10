@@ -7,12 +7,25 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "cocos2d.h"
+#import "cpMouse.h"
 
-@interface BallTheoryAppDelegate : NSObject <UIApplicationDelegate> {
-    UIWindow *window;
+
+@interface GameLayer : Layer {
+	cpMouse* mouse;
 }
 
-@property (nonatomic, retain) IBOutlet UIWindow *window;
+- (void) initChipmunk;
+
+// as cancelled and up do the same thing
+- (void)ccTouchesCancelled:(NSSet *)touches withEvent:(UIEvent *)event;
 
 @end
+
+@interface BallTheoryAppDelegate : NSObject <UIAccelerometerDelegate, UIAlertViewDelegate, UITextFieldDelegate, UIApplicationDelegate> {
+	UIWindow *window;
+}
+
+@end
+
 

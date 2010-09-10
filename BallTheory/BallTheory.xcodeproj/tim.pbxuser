@@ -1,5 +1,19 @@
 // !$*UTF8*$!
 {
+	1D3623240D0F684500981E51 /* BallTheoryAppDelegate.h */ = {
+		uiCtxt = {
+			sepNavIntBoundsRect = "{{0, 0}, {964, 416}}";
+			sepNavSelRange = "{140, 0}";
+			sepNavVisRange = "{0, 403}";
+		};
+	};
+	1D3623250D0F684500981E51 /* BallTheoryAppDelegate.m */ = {
+		uiCtxt = {
+			sepNavIntBoundsRect = "{{0, 0}, {523, 2106}}";
+			sepNavSelRange = "{4646, 0}";
+			sepNavVisRange = "{50, 381}";
+		};
+	};
 	1D6058900D05DD3D006BFB54 /* BallTheory */ = {
 		activeExec = 0;
 		executables = (
@@ -22,6 +36,7 @@
 		dataTipSortType = 0;
 		debuggerPlugin = GDBDebugging;
 		disassemblyDisplayState = 0;
+		dylibVariantSuffix = "";
 		enableDebugStr = 1;
 		environmentEntries = (
 		);
@@ -47,10 +62,108 @@
 		isa = PBXCodeSenseManager;
 		indexTemplatePath = "";
 	};
+	22963D461239EA4400A788A3 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 32CA4F630368D1EE00C91783 /* BallTheory_Prefix.pch */;
+		name = "BallTheory_Prefix.pch: 1";
+		rLen = 0;
+		rLoc = 0;
+		rType = 0;
+		vrLen = 189;
+		vrLoc = 0;
+	};
+	22963D481239EA4400A788A3 /* PlistBookmark */ = {
+		isa = PlistBookmark;
+		fRef = 8D1107310486CEB800E47090 /* BallTheory-Info.plist */;
+		fallbackIsa = PBXBookmark;
+		isK = 0;
+		kPath = (
+		);
+		name = "/Users/tim/Projects/IPhone/BallTheory/BallTheory-Info.plist";
+		rLen = 0;
+		rLoc = 9223372036854775808;
+	};
+	22963FA51239F0F700A788A3 /* cpMouse.c */ = {
+		uiCtxt = {
+			sepNavIntBoundsRect = "{{0, 0}, {764, 2353}}";
+			sepNavSelRange = "{0, 0}";
+			sepNavVisRange = "{0, 1161}";
+		};
+	};
+	22963FA61239F0F700A788A3 /* cpMouse.h */ = {
+		uiCtxt = {
+			sepNavIntBoundsRect = "{{0, 0}, {764, 1079}}";
+			sepNavSelRange = "{0, 0}";
+			sepNavVisRange = "{0, 1174}";
+		};
+	};
+	2296404A1239F55600A788A3 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 29B97316FDCFA39411CA2CEA /* main.m */;
+		name = "main.m: 13";
+		rLen = 0;
+		rLoc = 325;
+		rType = 0;
+		vrLen = 371;
+		vrLoc = 0;
+	};
+	2296404B1239F55600A788A3 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 22963FA51239F0F700A788A3 /* cpMouse.c */;
+		name = "cpMouse.c: 1";
+		rLen = 0;
+		rLoc = 0;
+		rType = 0;
+		vrLen = 1161;
+		vrLoc = 0;
+	};
+	2296404C1239F55600A788A3 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 22963FA61239F0F700A788A3 /* cpMouse.h */;
+		name = "cpMouse.h: 1";
+		rLen = 0;
+		rLoc = 0;
+		rType = 0;
+		vrLen = 1174;
+		vrLoc = 0;
+	};
+	2296404D1239F55600A788A3 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 1D3623240D0F684500981E51 /* BallTheoryAppDelegate.h */;
+		name = "BallTheoryAppDelegate.h: 7";
+		rLen = 0;
+		rLoc = 140;
+		rType = 0;
+		vrLen = 403;
+		vrLoc = 0;
+	};
+	2296406C1239F5BC00A788A3 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 1D3623250D0F684500981E51 /* BallTheoryAppDelegate.m */;
+		name = "BallTheoryAppDelegate.m: 8";
+		rLen = 0;
+		rLoc = 143;
+		rType = 0;
+		vrLen = 466;
+		vrLoc = 4180;
+	};
+	2296406D1239F5BC00A788A3 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 1D3623250D0F684500981E51 /* BallTheoryAppDelegate.m */;
+		name = "BallTheoryAppDelegate.m: 159";
+		rLen = 0;
+		rLoc = 4279;
+		rType = 0;
+		vrLen = 466;
+		vrLoc = 4180;
+	};
 	29B97313FDCFA39411CA2CEA /* Project object */ = {
 		activeBuildConfigurationName = Debug;
 		activeExecutable = 221A4944123762690045B058 /* BallTheory */;
 		activeTarget = 1D6058900D05DD3D006BFB54 /* BallTheory */;
+		addToTargets = (
+			1D6058900D05DD3D006BFB54 /* BallTheory */,
+		);
 		codeSenseManager = 221A4958123762730045B058 /* Code sense */;
 		executables = (
 			221A4944123762690045B058 /* BallTheory */,
@@ -61,9 +174,9 @@
 				PBXFileTableDataSourceColumnSortingKey = PBXFileDataSource_Filename_ColumnID;
 				PBXFileTableDataSourceColumnWidthsKey = (
 					20,
-					341,
+					586,
 					20,
-					48.16259765625,
+					48,
 					43,
 					43,
 					20,
@@ -78,11 +191,60 @@
 					PBXFileDataSource_Target_ColumnID,
 				);
 			};
-			PBXPerProjectTemplateStateSaveDate = 305619561;
-			PBXWorkspaceStateSaveDate = 305619561;
+			PBXConfiguration.PBXFileTableDataSource3.XCSCMDataSource = {
+				PBXFileTableDataSourceColumnSortingDirectionKey = "-1";
+				PBXFileTableDataSourceColumnSortingKey = PBXFileDataSource_Filename_ColumnID;
+				PBXFileTableDataSourceColumnWidthsKey = (
+					20,
+					20,
+					317,
+					20,
+					48.16259765625,
+					43,
+					43,
+					20,
+				);
+				PBXFileTableDataSourceColumnsKey = (
+					PBXFileDataSource_SCM_ColumnID,
+					PBXFileDataSource_FiletypeID,
+					PBXFileDataSource_Filename_ColumnID,
+					PBXFileDataSource_Built_ColumnID,
+					PBXFileDataSource_ObjectSize_ColumnID,
+					PBXFileDataSource_Errors_ColumnID,
+					PBXFileDataSource_Warnings_ColumnID,
+					PBXFileDataSource_Target_ColumnID,
+				);
+			};
+			PBXPerProjectTemplateStateSaveDate = 305785713;
+			PBXWorkspaceStateSaveDate = 305785713;
+		};
+		perUserProjectItems = {
+			22963D461239EA4400A788A3 /* PBXTextBookmark */ = 22963D461239EA4400A788A3 /* PBXTextBookmark */;
+			22963D481239EA4400A788A3 /* PlistBookmark */ = 22963D481239EA4400A788A3 /* PlistBookmark */;
+			2296404A1239F55600A788A3 /* PBXTextBookmark */ = 2296404A1239F55600A788A3 /* PBXTextBookmark */;
+			2296404B1239F55600A788A3 /* PBXTextBookmark */ = 2296404B1239F55600A788A3 /* PBXTextBookmark */;
+			2296404C1239F55600A788A3 /* PBXTextBookmark */ = 2296404C1239F55600A788A3 /* PBXTextBookmark */;
+			2296404D1239F55600A788A3 /* PBXTextBookmark */ = 2296404D1239F55600A788A3 /* PBXTextBookmark */;
+			2296406C1239F5BC00A788A3 /* PBXTextBookmark */ = 2296406C1239F5BC00A788A3 /* PBXTextBookmark */;
+			2296406D1239F5BC00A788A3 /* PBXTextBookmark */ = 2296406D1239F5BC00A788A3 /* PBXTextBookmark */;
 		};
 		sourceControlManager = 221A4957123762730045B058 /* Source Control */;
 		userBuildSettings = {
+		};
+	};
+	29B97316FDCFA39411CA2CEA /* main.m */ = {
+		uiCtxt = {
+			sepNavIntBoundsRect = "{{0, 0}, {764, 305}}";
+			sepNavSelRange = "{325, 0}";
+			sepNavVisRange = "{0, 371}";
+			sepNavWindowFrame = "{{15, 113}, {809, 660}}";
+		};
+	};
+	32CA4F630368D1EE00C91783 /* BallTheory_Prefix.pch */ = {
+		uiCtxt = {
+			sepNavIntBoundsRect = "{{0, 0}, {764, 337}}";
+			sepNavSelRange = "{0, 0}";
+			sepNavVisRange = "{0, 189}";
 		};
 	};
 }
