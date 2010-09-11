@@ -74,8 +74,6 @@
 		22963F2F1239ECC800A788A3 /* CJSONDeserializer.m in Sources */ = {isa = PBXBuildFile; fileRef = 22963F171239ECC800A788A3 /* CJSONDeserializer.m */; };
 		22963F301239ECC800A788A3 /* CJSONScanner.m in Sources */ = {isa = PBXBuildFile; fileRef = 22963F191239ECC800A788A3 /* CJSONScanner.m */; };
 		22963F311239ECC800A788A3 /* CJSONSerializer.m in Sources */ = {isa = PBXBuildFile; fileRef = 22963F1B1239ECC800A788A3 /* CJSONSerializer.m */; };
-		22963F3A1239EE6000A788A3 /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 22963F391239EE6000A788A3 /* OpenGLES.framework */; };
-		22963F3C1239EE6000A788A3 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 22963F3B1239EE6000A788A3 /* QuartzCore.framework */; };
 		22963F901239EE8800A788A3 /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 22963F8F1239EE8800A788A3 /* OpenGLES.framework */; };
 		22963F921239EE9500A788A3 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 22963F911239EE9500A788A3 /* QuartzCore.framework */; };
 		22963FA71239F0F700A788A3 /* cpMouse.c in Sources */ = {isa = PBXBuildFile; fileRef = 22963FA51239F0F700A788A3 /* cpMouse.c */; };
@@ -220,8 +218,6 @@
 		22963F191239ECC800A788A3 /* CJSONScanner.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CJSONScanner.m; sourceTree = "<group>"; };
 		22963F1A1239ECC800A788A3 /* CJSONSerializer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CJSONSerializer.h; sourceTree = "<group>"; };
 		22963F1B1239ECC800A788A3 /* CJSONSerializer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CJSONSerializer.m; sourceTree = "<group>"; };
-		22963F391239EE6000A788A3 /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
-		22963F3B1239EE6000A788A3 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		22963F8F1239EE8800A788A3 /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
 		22963F911239EE9500A788A3 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		22963FA51239F0F700A788A3 /* cpMouse.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = cpMouse.c; sourceTree = "<group>"; };
@@ -243,8 +239,6 @@
 				1D60589F0D05DD5A006BFB54 /* Foundation.framework in Frameworks */,
 				1DF5F4E00D08C38300B7A737 /* UIKit.framework in Frameworks */,
 				288765FD0DF74451002DB57D /* CoreGraphics.framework in Frameworks */,
-				22963F3A1239EE6000A788A3 /* OpenGLES.framework in Frameworks */,
-				22963F3C1239EE6000A788A3 /* QuartzCore.framework in Frameworks */,
 				22963F901239EE8800A788A3 /* OpenGLES.framework in Frameworks */,
 				22963F921239EE9500A788A3 /* QuartzCore.framework in Frameworks */,
 			);
