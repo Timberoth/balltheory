@@ -28,10 +28,20 @@ cpBody *staticBody;
 	srand([[NSDate date] timeIntervalSince1970]);
 	
 	// make a bunch of circles
+	/*
 	for (int i = 0; i < (rand() % 10) + 20; i++) {
 		cpBody* circle = makeCircle((rand() % 40) + 5);
 		circle->p = cpv( (rand() % 240) + 30,  (rand() % 360) + 30);
 	}
+	 */
+	
+	cpBody* circle = makeCircle(10);
+	circle->p = cpv( 120, 350 );
+	
+	makeStaticBox(90, 290, 100, 100);
+	
+	// Create player
+	createPlayer();
 	
 	// Make it look slightly prettier
 	glEnable(GL_LINE_SMOOTH);
@@ -48,26 +58,29 @@ cpBody *staticBody;
 
 - (void) initChipmunk{
 	// start chipumnk
-	// create the space for the bodies
-	// and set the hash to a rough estimate of how many shapes there could be
-	// set gravity, make the physics run loop
-	// make a bounding box the size of the screen
-	
 	cpInitChipmunk();
+	
+	// create the space for the bodies
 	space = cpSpaceNew();
+	
+	// set the hash to a rough estimate of how many shapes there could be
 	cpSpaceResizeStaticHash(space, 60.0, 1000);
 	cpSpaceResizeActiveHash(space, 60.0, 1000);
 	
+	// set gravity
 	space->gravity = cpv(0, -200);
-	staticBody = cpBodyNew(INFINITY, INFINITY);  
+	staticBody = cpBodyNew(INFINITY, INFINITY);
+	
+	// Schedule the physics run loop
 	[self schedule: @selector(step:)];
 	
+	// 320x480
 	CGSize s = [[Director sharedDirector] winSize];
 	
+	// make a bounding box the size of the screen
 	int margin = 4;
 	int dmargin = margin*2;
 	makeStaticBox(margin, margin, s.width - dmargin, s.height - dmargin);
-	createPlayer();
 }
 
 - (void) draw{  
