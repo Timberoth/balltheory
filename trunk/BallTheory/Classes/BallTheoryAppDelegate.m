@@ -35,13 +35,13 @@ cpBody *staticBody;
 	}
 	 */
 	
-	cpBody* circle = makeCircle(10);
-	circle->p = cpv( 120, 350 );
+	//cpBody* circle = makeCircle(10);
+	//circle->p = cpv( 120, 350 );
 	
 	makeStaticBox(90, 290, 100, 100);
 	
 	// Create player
-	createPlayer();
+	//createPlayer();
 	
 	// Make it look slightly prettier
 	glEnable(GL_LINE_SMOOTH);
@@ -69,6 +69,10 @@ cpBody *staticBody;
 	
 	// set gravity
 	space->gravity = cpv(0, -200);
+	
+	// set Elasticiy
+	space->elasticIterations = 10;
+	
 	staticBody = cpBodyNew(INFINITY, INFINITY);
 	
 	// Schedule the physics run loop
@@ -117,7 +121,31 @@ cpBody *staticBody;
 
 - (void)ccTouchesEnded:(NSSet *)touches withEvent:(UIEvent *)event {
 	[self ccTouchesCancelled:touches withEvent:event];
+	
+	UITouch *myTouch =  [touches anyObject];
+	CGPoint location = [myTouch locationInView: [myTouch view]];
+	location = [[Director sharedDirector] convertCoordinate: location];
+	
+	// Spawn new ball
+	cpBody* circle = makeCircle( rand()%5 + 4);
+	circle->p = cpv( location.x, location.y );
+	
+	// Give it a random push
+	int signX = rand()%2;
+	int signY = rand()%2;
+	if( signX == 0 )
+	{
+		signX = -1;
+	}
+	if( signY == 0 )
+	{
+		signY = -1;
+	}
+	cpBodyApplyImpulse( circle, cpv( signX*rand()%150, signY*rand()%150 ), cpvzero);
+	
 }
+
+
 - (void)ccTouchesCancelled:(NSSet *)touches withEvent:(UIEvent *)event {
 	cpMouseDestroy(mouse);
 }

@@ -4,6 +4,8 @@
 //
 //  Created by benmaslen on 14/03/2009.
 //  Copyright 2009 ortatherox.com. All rights reserved.
+// 
+//  Modified by Tim Lambert on 10/09/2010
 //
 
 #import "chipmunk.h"
@@ -24,7 +26,7 @@ cpBody* makeCircle(int radius){
   cpSpaceAddBody(space, body);
   // and a shape to represent its collision box
   cpShape* shape = cpCircleShapeNew(body, radius, cpvzero);
-  shape->e = 0.1; shape->u = 0.5;
+  shape->e = 0.7; shape->u = 0.5;
   cpSpaceAddShape(space, shape);
   return body;
 }
