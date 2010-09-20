@@ -123,3 +123,82 @@ void  createPlayer () {
   
 }
 
+
+// x and y is the top left vertex
+NSMutableArray* createContainer( float x, float y ) 
+{  
+	// Create empty array for shapes
+	NSMutableArray  *shapes = [[NSMutableArray alloc] init];
+	
+	float w = 75.0f;
+	float h = 50.0f;
+	float w2 = 27.5f;
+	float h2 = 27.5f;
+	 
+	
+	cpShape * shape;
+	shape = cpSegmentShapeNew(staticBody, cpv(x,y), cpv(x+w, y), 0.0f);
+	shape->e = 1.0; shape->u = 1.0;
+	cpSpaceAddStaticShape(space, shape);
+	[shapes addObject:[NSValue valueWithPointer:shape]];
+	
+	shape = cpSegmentShapeNew(staticBody, cpv(x+w, y), cpv(x+w, y-h ), 0.0f);
+	shape->e = 1.0; shape->u = 1.0;
+	cpSpaceAddStaticShape(space, shape);
+	[shapes addObject:[NSValue valueWithPointer:shape]];
+	
+	shape = cpSegmentShapeNew(staticBody, cpv(x+w, y-h), cpv(x+w-w2, y-h-h2 ), 0.0f);
+	shape->e = 1.0; shape->u = 1.0;
+	cpSpaceAddStaticShape(space, shape);
+	[shapes addObject:[NSValue valueWithPointer:shape]];
+	
+	shape = cpSegmentShapeNew(staticBody, cpv(x+w2, y-h-h2 ), cpv(x, y-h), 0.0f);
+	shape->e = 1.0; shape->u = 1.0;
+	cpSpaceAddStaticShape(space, shape);
+	[shapes addObject:[NSValue valueWithPointer:shape]];
+	
+	shape = cpSegmentShapeNew(staticBody, cpv(x, y-h), cpv(x, y), 0.0f);
+	shape->e = 1.0; shape->u = 1.0;
+	cpSpaceAddStaticShape(space, shape);
+	[shapes addObject:[NSValue valueWithPointer:shape]];
+	
+	return shapes;
+}
+
+
+void destroyContainer( NSMutableArray* container )
+{
+	if( !container )
+		return;
+	
+	for( int i = 0; i < [container count]; i++ )
+	{
+		cpShape* shape = (cpShape*)[[container objectAtIndex:i] pointerValue];
+		cpSpaceRemoveStaticShape( space, shape );
+		cpShapeFree( shape );
+	}
+	
+	[container release];
+	
+	// The pointer must be nulled out outside of this function.
+}
+
+
+cpBody* createSpinner( float x, float y )
+{
+	cpBody* body = NULL;
+	
+	
+	
+	return body;
+}
+
+
+void destroySpinner( cpBody* spinner )
+{
+
+	
+	
+}
+
+

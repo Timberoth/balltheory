@@ -13,8 +13,18 @@ extern cpBody* makeCircle(int radius);
 extern void drawObject(void *ptr, void *unused);
 extern void createPlayer();
 extern void makeStaticBox(float x, float y, float width, float height);
+extern NSMutableArray* createContainer( float x, float y );
+extern void destroyContainer( NSMutableArray* container );
+
+
+
+
 cpSpace *space;
 cpBody *staticBody;
+
+bool mDestroyContainer = false;
+
+NSMutableArray* adder;
 
 @implementation GameLayer
 -(id) init {
@@ -27,21 +37,7 @@ cpBody *staticBody;
 	//seed the random generator
 	srand([[NSDate date] timeIntervalSince1970]);
 	
-	// make a bunch of circles
-	/*
-	for (int i = 0; i < (rand() % 10) + 20; i++) {
-		cpBody* circle = makeCircle((rand() % 40) + 5);
-		circle->p = cpv( (rand() % 240) + 30,  (rand() % 360) + 30);
-	}
-	 */
-	
-	//cpBody* circle = makeCircle(10);
-	//circle->p = cpv( 120, 350 );
-	
-	makeStaticBox(90, 290, 100, 100);
-	
-	// Create player
-	//createPlayer();
+	adder = createContainer(90, 290);
 	
 	// Make it look slightly prettier
 	glEnable(GL_LINE_SMOOTH);
@@ -127,7 +123,7 @@ cpBody *staticBody;
 	location = [[Director sharedDirector] convertCoordinate: location];
 	
 	// Spawn new ball
-	cpBody* circle = makeCircle( rand()%5 + 4);
+	cpBody* circle = makeCircle( 5 );
 	circle->p = cpv( location.x, location.y );
 	
 	// Give it a random push
@@ -156,6 +152,13 @@ cpBody *staticBody;
 	cpFloat dt = delta/(cpFloat)steps;
 	for(int i=0; i<steps; i++){
 		cpSpaceStep(space, dt);
+	}
+	
+	// Destroy the container if necessary
+	if( mDestroyContainer && adder != NULL )
+	{
+		destroyContainer( adder );
+		adder = NULL;
 	}
 } 
 
