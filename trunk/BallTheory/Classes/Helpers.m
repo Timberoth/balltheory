@@ -130,10 +130,14 @@ NSMutableArray* createContainer( float x, float y )
 	// Create empty array for shapes
 	NSMutableArray  *shapes = [[NSMutableArray alloc] init];
 	
-	float w = 75.0f;
-	float h = 50.0f;
-	float w2 = 27.5f;
-	float h2 = 27.5f;
+	float scale = 1.5;
+	float w = 75.0f * scale;
+	float h = 50.0f * scale;
+	float w2 = 27.5f * scale;
+	float h2 = 27.5f * scale;
+	
+	x = x - w/2.0;
+	y = y + (h+h2)/2.0;
 	 
 	
 	cpShape * shape;
@@ -187,7 +191,7 @@ void destroyContainer( NSMutableArray* container )
 cpBody* createSpinner( float x, float y )
 {
 	int num = 4;
-	int width = 300.0;
+	int width = 85.0;
 	int halfwidth = width/2.0;
 	int height = 5.0;
 	int halfheight = height/2.0;
@@ -199,7 +203,7 @@ cpBody* createSpinner( float x, float y )
 	};
 	
 	// Create body
-	cpBody *body = cpBodyNew(1.0, cpMomentForPoly(1.0, num, verts, cpvzero));
+	cpBody *body = cpBodyNew(1.0, cpMomentForPoly(100.0, num, verts, cpvzero));
 	cpSpaceAddBody(space, body);
 	body->p = cpv( x, y );
 	

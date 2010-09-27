@@ -84,9 +84,9 @@ cpBody* spinner;
 	int dmargin = margin*2;
 	makeStaticBox(margin, margin, s.width - dmargin, s.height - dmargin);
 	
-	//adder = createContainer(90, 290);
+	adder = createContainer(s.width/2.0, s.height/2.0);
 	
-	spinner = createSpinner(s.width/2.0, s.height/2.0);
+	spinner = createSpinner(s.width/2.0, s.height/2.0+5.0);
 	
 }
 
@@ -130,7 +130,7 @@ cpBody* spinner;
 	location = [[Director sharedDirector] convertCoordinate: location];
 	
 	// Spawn new ball
-	for( int i = 0; i < 10; i++ )
+	for( int i = 0; i < 5; i++ )
 	{
 		cpBody* circle = makeCircle( 5 );
 		circle->p = cpv( location.x, location.y );
