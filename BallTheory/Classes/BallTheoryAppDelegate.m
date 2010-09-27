@@ -19,7 +19,8 @@ extern void destroyContainer( NSMutableArray* container );
 extern cpBody* createSpinner( float x, float y );
 extern void destroySpinner();
 
-
+extern cpShape* createContainerCap(float x, float y);
+extern void destroyContainerCap( cpShape *containerCap );
 
 
 cpSpace *space;
@@ -27,8 +28,12 @@ cpBody *staticBody;
 
 bool mDestroyContainer = false;
 
-NSMutableArray* adder;
-cpBody* spinner;
+NSMutableArray* adder = NULL;
+cpBody* spinner = NULL;
+
+cpShape* containerCap = NULL;
+
+int capCounter = 0;
 
 @implementation GameLayer
 -(id) init {
@@ -88,6 +93,8 @@ cpBody* spinner;
 	
 	spinner = createSpinner(s.width/2.0, s.height/2.0+5.0);
 	
+	containerCap = createContainerCap(s.width/2.0, (s.height/2.0) - 57.5);
+	
 }
 
 - (void) draw{  
@@ -130,6 +137,7 @@ cpBody* spinner;
 	location = [[Director sharedDirector] convertCoordinate: location];
 	
 	// Spawn new ball
+	/*
 	for( int i = 0; i < 5; i++ )
 	{
 		cpBody* circle = makeCircle( 5 );
@@ -148,7 +156,10 @@ cpBody* spinner;
 		}
 		cpBodyApplyImpulse( circle, cpv( signX*rand()%150, signY*rand()%150 ), cpvzero);
 	}
-		
+	 */
+	
+	cpBody* circle = makeCircle( 5 );
+	circle->p = cpv( location.x, location.y );
 }
 
 
@@ -172,7 +183,24 @@ cpBody* spinner;
 	}
 	
 	// Make the spinner spin at a constant velocity
-	spinner->w = 5.0f;
+	spinner->w = -5.0f;
+	
+	capCounter++;
+	if( capCounter > 180 )
+	{
+		capCounter = 0;
+		if( containerCap == NULL )
+		{
+			CGSize s = [[Director sharedDirector] winSize];
+			containerCap = createContainerCap(s.width/2.0, (s.height/2.0) - 57.5);
+		}
+		else 
+		{
+			destroyContainerCap( containerCap );
+			containerCap = NULL;
+		}
+
+	}
 } 
 
 - (void)accelerometer:(UIAccelerometer*)accelerometer didAccelerate:(UIAcceleration*)acceleration{	
