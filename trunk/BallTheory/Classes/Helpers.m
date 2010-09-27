@@ -186,9 +186,31 @@ void destroyContainer( NSMutableArray* container )
 
 cpBody* createSpinner( float x, float y )
 {
-	cpBody* body = NULL;
+	int num = 4;
+	int width = 300.0;
+	int halfwidth = width/2.0;
+	int height = 5.0;
+	int halfheight = height/2.0;
+	cpVect verts[] = {
+		cpv(-halfwidth, -halfheight),
+		cpv(-halfwidth, halfheight),
+		cpv( halfwidth, halfheight),
+		cpv( halfwidth, -halfheight),
+	};
 	
+	// Create body
+	cpBody *body = cpBodyNew(1.0, cpMomentForPoly(1.0, num, verts, cpvzero));
+	cpSpaceAddBody(space, body);
+	body->p = cpv( x, y );
 	
+	// Create Collision Shape
+	cpShape* shape = cpPolyShapeNew( body, num, verts, cpvzero);
+	shape->e = 0.1; shape->u = 0.8;
+	cpSpaceAddShape( space, shape );
+	
+	// Create Joint with static body
+	cpJoint *constraint = cpPivotJointNew(body, staticBody, cpv( x, y ) );
+	cpSpaceAddJoint( space, constraint );
 	
 	return body;
 }
@@ -200,5 +222,6 @@ void destroySpinner( cpBody* spinner )
 	
 	
 }
+
 
 
