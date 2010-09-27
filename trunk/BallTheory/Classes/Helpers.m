@@ -14,21 +14,27 @@ extern cpSpace* space;
 extern cpBody *staticBody;
 
 cpBody* makeCircle(int radius){
-  int num = 4;
-  cpVect verts[] = {
-    cpv(-radius, -radius),
-    cpv(-radius, radius),
-    cpv( radius, radius),
-    cpv( radius, -radius),
-  };
-  // all physics stuff needs a body
-  cpBody *body = cpBodyNew(1.0, cpMomentForPoly(1.0, num, verts, cpvzero));
-  cpSpaceAddBody(space, body);
-  // and a shape to represent its collision box
-  cpShape* shape = cpCircleShapeNew(body, radius, cpvzero);
-  shape->e = 0.7; shape->u = 0.5;
-  cpSpaceAddShape(space, shape);
-  return body;
+	int num = 4;
+	cpVect verts[] = {
+		cpv(-radius, -radius),
+		cpv(-radius, radius),
+		cpv( radius, radius),
+		cpv( radius, -radius),
+	};
+	
+	float elasticity = 0.75f;
+	float friction = 0.5f;
+
+
+	// all physics stuff needs a body
+	cpBody *body = cpBodyNew(1.0, cpMomentForPoly(1.0, num, verts, cpvzero));
+	cpSpaceAddBody(space, body);
+	// and a shape to represent its collision box
+	cpShape* shape = cpCircleShapeNew(body, radius, cpvzero);
+	shape->e = elasticity; 
+	shape->u = friction;
+	cpSpaceAddShape(space, shape);
+	return body;
 }
 
 void makeStaticBox(float x, float y, float width, float height){
@@ -49,6 +55,7 @@ void makeStaticBox(float x, float y, float width, float height){
   shape->e = 1.0; shape->u = 1.0;
   cpSpaceAddStaticShape(space, shape);
 }
+
 
 void  createPlayer () {  
   cpShape * shape;
@@ -136,33 +143,42 @@ NSMutableArray* createContainer( float x, float y )
 	float w2 = 27.5f * scale;
 	float h2 = 27.5f * scale;
 	
+	// Calculate proper offsets so that the container is centered around (x,y)
 	x = x - w/2.0;
 	y = y + (h+h2)/2.0;
+	
+	float elasticity = 0.75f;
+	float friction = 0.5f;
 	 
 	
 	cpShape * shape;
 	shape = cpSegmentShapeNew(staticBody, cpv(x,y), cpv(x+w, y), 0.0f);
-	shape->e = 1.0; shape->u = 1.0;
+	shape->e = elasticity;
+	shape->u = friction;
 	cpSpaceAddStaticShape(space, shape);
 	[shapes addObject:[NSValue valueWithPointer:shape]];
 	
 	shape = cpSegmentShapeNew(staticBody, cpv(x+w, y), cpv(x+w, y-h ), 0.0f);
-	shape->e = 1.0; shape->u = 1.0;
+	shape->e = elasticity;
+	shape->u = friction;
 	cpSpaceAddStaticShape(space, shape);
 	[shapes addObject:[NSValue valueWithPointer:shape]];
 	
 	shape = cpSegmentShapeNew(staticBody, cpv(x+w, y-h), cpv(x+w-w2, y-h-h2 ), 0.0f);
-	shape->e = 1.0; shape->u = 1.0;
+	shape->e = elasticity;
+	shape->u = friction;
 	cpSpaceAddStaticShape(space, shape);
 	[shapes addObject:[NSValue valueWithPointer:shape]];
 	
 	shape = cpSegmentShapeNew(staticBody, cpv(x+w2, y-h-h2 ), cpv(x, y-h), 0.0f);
-	shape->e = 1.0; shape->u = 1.0;
+	shape->e = elasticity;
+	shape->u = friction;
 	cpSpaceAddStaticShape(space, shape);
 	[shapes addObject:[NSValue valueWithPointer:shape]];
 	
 	shape = cpSegmentShapeNew(staticBody, cpv(x, y-h), cpv(x, y), 0.0f);
-	shape->e = 1.0; shape->u = 1.0;
+	shape->e = elasticity;
+	shape->u = friction;
 	cpSpaceAddStaticShape(space, shape);
 	[shapes addObject:[NSValue valueWithPointer:shape]];
 	
@@ -228,4 +244,29 @@ void destroySpinner( cpBody* spinner )
 }
 
 
+cpShape* createContainerCap( float x, float y )
+{
+	float scale = 1.5;
+	float w = 20.0f * scale;
+	
+	// Calculate proper offsets so that the container is centered around (x,y)
+	x = x - w/2.0;
+	
+	float elasticity = 0.75f;
+	float friction = 0.5f;
+	
+	cpShape * shape;
+	shape = cpSegmentShapeNew(staticBody, cpv(x,y), cpv(x+w, y), 0.0f);
+	shape->e = elasticity;
+	shape->u = friction;
+	cpSpaceAddStaticShape(space, shape);
+	
+	return shape;
+}
+
+void destroyContainerCap( cpShape *containerCap )
+{
+	cpSpaceRemoveStaticShape( space, containerCap );
+	cpShapeFree( containerCap );
+}
 
