@@ -16,6 +16,9 @@ extern void makeStaticBox(float x, float y, float width, float height);
 extern NSMutableArray* createContainer( float x, float y );
 extern void destroyContainer( NSMutableArray* container );
 
+extern cpBody* createSpinner( float x, float y );
+extern void destroySpinner();
+
 
 
 
@@ -25,6 +28,7 @@ cpBody *staticBody;
 bool mDestroyContainer = false;
 
 NSMutableArray* adder;
+cpBody* spinner;
 
 @implementation GameLayer
 -(id) init {
@@ -36,8 +40,6 @@ NSMutableArray* adder;
 	
 	//seed the random generator
 	srand([[NSDate date] timeIntervalSince1970]);
-	
-	adder = createContainer(90, 290);
 	
 	// Make it look slightly prettier
 	glEnable(GL_LINE_SMOOTH);
@@ -81,6 +83,11 @@ NSMutableArray* adder;
 	int margin = 4;
 	int dmargin = margin*2;
 	makeStaticBox(margin, margin, s.width - dmargin, s.height - dmargin);
+	
+	//adder = createContainer(90, 290);
+	
+	spinner = createSpinner(s.width/2.0, s.height/2.0);
+	
 }
 
 - (void) draw{  
@@ -123,22 +130,25 @@ NSMutableArray* adder;
 	location = [[Director sharedDirector] convertCoordinate: location];
 	
 	// Spawn new ball
-	cpBody* circle = makeCircle( 5 );
-	circle->p = cpv( location.x, location.y );
-	
-	// Give it a random push
-	int signX = rand()%2;
-	int signY = rand()%2;
-	if( signX == 0 )
+	for( int i = 0; i < 10; i++ )
 	{
-		signX = -1;
+		cpBody* circle = makeCircle( 5 );
+		circle->p = cpv( location.x, location.y );
+		
+		// Give it a random push
+		int signX = rand()%2;
+		int signY = rand()%2;
+		if( signX == 0 )
+		{
+			signX = -1;
+		}
+		if( signY == 0 )
+		{
+			signY = -1;
+		}
+		cpBodyApplyImpulse( circle, cpv( signX*rand()%150, signY*rand()%150 ), cpvzero);
 	}
-	if( signY == 0 )
-	{
-		signY = -1;
-	}
-	cpBodyApplyImpulse( circle, cpv( signX*rand()%150, signY*rand()%150 ), cpvzero);
-	
+		
 }
 
 
@@ -160,6 +170,9 @@ NSMutableArray* adder;
 		destroyContainer( adder );
 		adder = NULL;
 	}
+	
+	// Make the spinner spin at a constant velocity
+	spinner->w = 5.0f;
 } 
 
 - (void)accelerometer:(UIAccelerometer*)accelerometer didAccelerate:(UIAcceleration*)acceleration{	
