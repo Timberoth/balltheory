@@ -7,7 +7,7 @@
 //
 
 #import "chipmunk.h"
-#import "Primitives.h"
+#import "CCDrawingPrimitives.h"
 #import "cocos2d.h"
 #import "OpenGL_Internal.h"
 #include <stdlib.h>
@@ -18,7 +18,10 @@ void drawCircleShape(cpShape *shape) {
 	cpBody *body = shape->body;
 	cpCircleShape *circle = (cpCircleShape *)shape;
 	cpVect c = cpvadd(body->p, cpvrotate(circle->c, body->rot));
-	drawCircle(c.x, c.y, circle->r, body->a, 25);
+	CGPoint point;
+	point.x = c.x;
+	point.y = c.y;
+	ccDrawCircle( point, circle->r, body->a, 25, true);
   // !important this number changes the quality of circles
 }
 
@@ -27,7 +30,13 @@ void drawSegmentShape(cpShape *shape) {
 	cpSegmentShape *seg = (cpSegmentShape *)shape;
 	cpVect a = cpvadd(body->p, cpvrotate(seg->a, body->rot));
 	cpVect b = cpvadd(body->p, cpvrotate(seg->b, body->rot));
-	drawLine( a.x, a.y, b.x, b.y );
+	CGPoint pointA;
+	CGPoint pointB;
+	pointA.x = a.x;
+	pointA.y = a.y;
+	pointB.x = b.x;
+	pointB.y = b.y;
+	ccDrawLine( pointA, pointB );
 }
 
 void drawPolyShape(cpShape *shape) {
@@ -37,17 +46,18 @@ void drawPolyShape(cpShape *shape) {
 	int num = poly->numVerts;
 	cpVect *verts = poly->verts;
 	
-	float *vertices = malloc( sizeof(float)*2*poly->numVerts);
-	if(!vertices)
+	CGPoint* points = malloc( sizeof(CGPoint)* num );
+	if( !points )
 		return;
 	
 	for(int i=0; i<num; i++){
 		cpVect v = cpvadd(body->p, cpvrotate(verts[i], body->rot));
-		vertices[i*2] = v.x;
-		vertices[i*2+1] = v.y;
+		points[i].x = v.x;
+		points[i].y = v.y;
 	}
-	drawPoly( vertices, poly->numVerts );
-	free(vertices);
+	
+	ccDrawPoly( points, num, true );
+	free( points );
 }
 
 void drawObject(void *ptr, void *unused) {

@@ -8,10 +8,11 @@
 
 #import <UIKit/UIKit.h>
 #import "cocos2d.h"
+#import "CCLayer.h"
 #import "cpMouse.h"
 
 
-@interface GameLayer : Layer {
+@interface GameLayer : CCLayer {
 	cpMouse* mouse;
 }
 

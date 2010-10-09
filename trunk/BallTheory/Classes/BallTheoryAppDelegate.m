@@ -8,7 +8,6 @@
 
 #import "BallTheoryAppDelegate.h"
 
-
 extern cpBody* makeCircle(int radius);
 extern void drawObject(void *ptr, void *unused);
 extern void createPlayer();
@@ -82,7 +81,7 @@ int capCounter = 0;
 	[self schedule: @selector(step:)];
 	
 	// 320x480
-	CGSize s = [[Director sharedDirector] winSize];
+	CGSize s = [[CCDirector sharedDirector] winSize];
 	
 	// make a bounding box the size of the screen
 	int margin = 4;
@@ -110,7 +109,9 @@ int capCounter = 0;
 - (void)ccTouchesMoved:(NSSet*)touches withEvent:(UIEvent*)event{  
 	UITouch *myTouch =  [touches anyObject];
 	CGPoint location = [myTouch locationInView: [myTouch view]];
-	location = [[Director sharedDirector] convertCoordinate: location];
+	
+	
+	location = [[CCDirector sharedDirector] convertToGL: location];
 	//move the nouse to the click
 	cpMouseMove(mouse, cpv(location.x, location.y));
 	if(mouse->grabbedBody == nil){
@@ -118,12 +119,15 @@ int capCounter = 0;
 		// try get one
 		cpMouseGrab(mouse, 0);
 	}
+
 }
 
 - (void)ccTouchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
 	UITouch *myTouch =  [touches anyObject];
 	CGPoint location = [myTouch locationInView: [myTouch view]];
-	location = [[Director sharedDirector] convertCoordinate: location];
+	
+	
+	location = [[CCDirector sharedDirector] convertToGL: location];
 	mouse = cpMouseNew(space);
 	cpMouseMove(mouse, cpv(location.x, location.y));
 	cpMouseGrab(mouse, 0);
@@ -134,7 +138,7 @@ int capCounter = 0;
 	
 	UITouch *myTouch =  [touches anyObject];
 	CGPoint location = [myTouch locationInView: [myTouch view]];
-	location = [[Director sharedDirector] convertCoordinate: location];
+	location = [[CCDirector sharedDirector] convertToGL: location];
 	
 	// Spawn new ball
 	/*
@@ -159,9 +163,8 @@ int capCounter = 0;
 	 */
 	
 	cpBody* circle = makeCircle( 5 );
-	circle->p = cpv( location.x, location.y );
+	circle->p = cpv( location.x, location.y );	
 }
-
 
 - (void)ccTouchesCancelled:(NSSet *)touches withEvent:(UIEvent *)event {
 	cpMouseDestroy(mouse);
@@ -169,6 +172,7 @@ int capCounter = 0;
 
 
 -(void) step: (ccTime) delta {
+	
 	int steps = 2;
 	cpFloat dt = delta/(cpFloat)steps;
 	for(int i=0; i<steps; i++){
@@ -191,7 +195,7 @@ int capCounter = 0;
 		capCounter = 0;
 		if( containerCap == NULL )
 		{
-			CGSize s = [[Director sharedDirector] winSize];
+			CGSize s = [[CCDirector sharedDirector] winSize];
 			containerCap = createContainerCap(s.width/2.0, (s.height/2.0) - 57.5);
 		}
 		else 
@@ -229,16 +233,16 @@ int capCounter = 0;
 	//[window setMultipleTouchEnabled:YES];
 	
 	//[[Director sharedDirector] setLandscape: YES];
-	[[Director sharedDirector] setDisplayFPS:YES];
+	[[CCDirector sharedDirector] setDisplayFPS:YES];
 	
-	[[Director sharedDirector] attachInWindow:window];
+	[[CCDirector sharedDirector] attachInWindow:window];
 	
-	Scene *scene = [Scene node];
-	[scene add: [GameLayer node]];
+	CCScene *scene = [CCScene node];
+	[scene addChild: [GameLayer node]];
 	
 	[window makeKeyAndVisible];
 	
-	[[Director sharedDirector] runWithScene: scene];
+	[[CCDirector sharedDirector] runWithScene: scene];
 	
 }
 -(void)dealloc
@@ -247,15 +251,15 @@ int capCounter = 0;
 }
 -(void) applicationWillResignActive:(UIApplication *)application
 {
-	[[Director sharedDirector] pause];
+	[[CCDirector sharedDirector] pause];
 }
 -(void) applicationDidBecomeActive:(UIApplication *)application
 {
-	[[Director sharedDirector] resume];
+	[[CCDirector sharedDirector] resume];
 }
 - (void)applicationDidReceiveMemoryWarning:(UIApplication *)application
 {
-	[[TextureMgr sharedTextureMgr] removeAllTextures];
+
 }
 
 @end
