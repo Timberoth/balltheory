@@ -11,12 +11,14 @@
 
 @implementation GameCamera
 
+@synthesize zoom;
+
 -(BOOL)initWithController:( CCScene* )c
 {
 	controller = c;
 	currX = 0.0f;
 	currY = 0.0f;
-	zoomLevel = 1.0f;
+	zoom = 1.0f;
 	controller = c;
 	
 	if(c == NULL )
@@ -50,13 +52,6 @@
 	point.x  = currX;
 	point.y = currY;
 	return point;
-}
-
-
-
--(float)zoom
-{
-	return zoomLevel;
 }
 
 

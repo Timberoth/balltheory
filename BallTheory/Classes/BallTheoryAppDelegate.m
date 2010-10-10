@@ -38,6 +38,8 @@ int capCounter = 0;
 // Game Camera
 GameCamera* mCamera;
 
+CGPoint touchStart;
+
 @implementation GameLayer
 -(id) init {
 	[super init];
@@ -109,7 +111,7 @@ GameCamera* mCamera;
 	cpSpaceHashEach(space->staticShapes, &drawObject, NULL);  
 }
 
-
+/*
 - (void)ccTouchesMoved:(NSSet*)touches withEvent:(UIEvent*)event{  
 	UITouch *myTouch =  [touches anyObject];
 	CGPoint location = [myTouch locationInView: [myTouch view]];
@@ -125,24 +127,54 @@ GameCamera* mCamera;
 	}
 
 }
+ */
+
+- (void)ccTouchesMoved:(NSSet *)touches withEvent:(UIEvent *)event
+{
+	// move camera and eye XY += change in movement
+	UITouch *touch = [touches anyObject];
+	
+	CGPoint location = [touch locationInView: [touch view]];
+	location = [[CCDirector sharedDirector] convertToGL: location];  // now in cocos2D coords
+	
+	CGPoint delta = CGPointMake((location.x - touchStart.x), (location.y-touchStart.y));
+	
+	// ADJUST CAMERA
+	[mCamera panCameraBy:delta];  // moves it but doesn't draw it yet.
+	
+	touchStart = location;  // touchStart is initially set in the ccTouchesBegan method.
+	
+}
+
+
 
 - (void)ccTouchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
-	UITouch *myTouch =  [touches anyObject];
-	CGPoint location = [myTouch locationInView: [myTouch view]];
 	
+	UITouch *touch =  [touches anyObject];
 	
+	CGPoint location = [touch locationInView: [touch view]];
 	location = [[CCDirector sharedDirector] convertToGL: location];
+	
+	// Track where the touch started.
+	touchStart = location;
+	
 	mouse = cpMouseNew(space);
-	cpMouseMove(mouse, cpv(location.x, location.y));
-	cpMouseGrab(mouse, 0);
+	//cpMouseMove(mouse, cpv(location.x, location.y));
+	//cpMouseGrab(mouse, 0);
 }
+
+
 
 - (void)ccTouchesEnded:(NSSet *)touches withEvent:(UIEvent *)event {
 	[self ccTouchesCancelled:touches withEvent:event];
 	
-	UITouch *myTouch =  [touches anyObject];
-	CGPoint location = [myTouch locationInView: [myTouch view]];
+	UITouch *touch =  [touches anyObject];
+	
+	CGPoint location = [touch locationInView: [touch view]];
 	location = [[CCDirector sharedDirector] convertToGL: location];
+	
+	location = [self convertTouchToGameCoords:touch ];
+	
 	
 	// Spawn new ball
 	/*
@@ -168,11 +200,20 @@ GameCamera* mCamera;
 	
 	cpBody* circle = makeCircle( 5 );
 	circle->p = cpv( location.x, location.y );	
+	
+	// TEST CAMERA ZOOM
+	float currentZoom = [mCamera zoom];
+	currentZoom = currentZoom + 0.1;
+	mCamera.zoom = currentZoom;
+	
+	
 }
+
 
 - (void)ccTouchesCancelled:(NSSet *)touches withEvent:(UIEvent *)event {
 	cpMouseDestroy(mouse);
 }
+
 
 
 -(void) step: (ccTime) delta {
@@ -257,6 +298,21 @@ GameCamera* mCamera;
 	glPopMatrix();
 	glMatrixMode(GL_MODELVIEW);
 	glLoadIdentity();
+}
+
+
+-(CGPoint) convertTouchToGameCoords:(UITouch*)touch
+{
+	CGSize screenSize = [[CCDirector sharedDirector] displaySize];
+	CGPoint location = [touch locationInView: [touch view]];
+	
+	location = [[CCDirector sharedDirector] convertToGL: location];  // now in cocos2D coords
+	
+	// calculate world location
+	location.x = [mCamera position].x + (location.x - screenSize.width/2.0) * (1.0/[mCamera zoom]);
+	location.y = [mCamera position].y + (location.y - screenSize.height/2.0) * (1.0/[mCamera zoom]);
+	
+	return location;
 }
 
 @end

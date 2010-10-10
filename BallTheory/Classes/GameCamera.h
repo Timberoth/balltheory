@@ -13,7 +13,7 @@
 @interface GameCamera : NSObject {
 	
 	// normalised.  i.e. 1.0 = 100%
-	float zoomLevel;  
+	float zoom;  
 	
 	// to store the last value of the camera.
 	float currX;
@@ -23,6 +23,7 @@
 	CCScene *controller;  
 	
 }
+@property float zoom;
 
 -(BOOL)initWithController:(CCScene*)c;
 
@@ -33,7 +34,5 @@
 -(void)moveCameraTo:(CGPoint)movePos; 
 
 -(CGPoint)position;
-
--(float)zoom;
 
 @end
