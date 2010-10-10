@@ -7,6 +7,7 @@
 //
 
 #import "BallTheoryAppDelegate.h"
+#import "GameCamera.h"
 
 extern cpBody* makeCircle(int radius);
 extern void drawObject(void *ptr, void *unused);
@@ -33,6 +34,9 @@ cpBody* spinner = NULL;
 cpShape* containerCap = NULL;
 
 int capCounter = 0;
+
+// Game Camera
+GameCamera* mCamera;
 
 @implementation GameLayer
 -(id) init {
@@ -222,7 +226,46 @@ int capCounter = 0;
 }
 
 
+-(void)visit{
+	//OpenGL Code here that adjusts the camera
+	
+	CGSize screenDims = [[CCDirector sharedDirector] displaySize];
+	CGPoint camPos = [mCamera position];
+	//camPos = [[CCDirector sharedDirector] convertToGL:camPos];
+	float camZoom = [mCamera zoom];
+	[[CCDirector sharedDirector] setProjection:kCCDirectorProjectionCustom];
+	//now set your projection
+	glMatrixMode(GL_PROJECTION);
+	//save current projection state
+	glPushMatrix();
+	glLoadIdentity();
+	
+	glOrthof(camPos.x - screenDims.width/(2*camZoom),
+			 camPos.x + screenDims.width/(2*camZoom),
+			 camPos.y - screenDims.height/(2*camZoom),
+			 camPos.y + screenDims.height/(2*camZoom),
+			 -1000,
+			 1000);
+	
+	glMatrixMode(GL_MODELVIEW);
+	glLoadIdentity(); 
+	
+	[super visit];
+	
+	//put it back
+	glMatrixMode(GL_PROJECTION);
+	glPopMatrix();
+	glMatrixMode(GL_MODELVIEW);
+	glLoadIdentity();
+}
+
 @end
+
+
+
+
+
+
 
 @implementation BallTheoryAppDelegate
 
@@ -240,23 +283,42 @@ int capCounter = 0;
 	CCScene *scene = [CCScene node];
 	[scene addChild: [GameLayer node]];
 	
+	// Initialize GameCamera
+	mCamera = [GameCamera alloc];
+	if( mCamera == NULL )
+	{
+		printf("Failed to create the Game Camera.");
+		
+		// Need to bail out gracefully here.
+	}
+	else 
+	{
+		[ mCamera initWithController:scene ];
+		
+		// Look at the center of the screen
+		CGPoint point = CGPointMake(160.0, 240.0);
+		[ mCamera moveCameraTo:point ]; 
+	}
+
 	[window makeKeyAndVisible];
 	
 	[[CCDirector sharedDirector] runWithScene: scene];
 	
 }
--(void)dealloc
-{
-	[super dealloc];
-}
+
+
 -(void) applicationWillResignActive:(UIApplication *)application
 {
 	[[CCDirector sharedDirector] pause];
 }
+
+
 -(void) applicationDidBecomeActive:(UIApplication *)application
 {
 	[[CCDirector sharedDirector] resume];
 }
+
+
 - (void)applicationDidReceiveMemoryWarning:(UIApplication *)application
 {
 
