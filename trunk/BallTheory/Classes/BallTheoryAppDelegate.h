@@ -18,8 +18,15 @@
 
 - (void) initChipmunk;
 
+
 // as cancelled and up do the same thing
 - (void)ccTouchesCancelled:(NSSet *)touches withEvent:(UIEvent *)event;
+
+
+// Convert to game coordinates.
+-(CGPoint) convertTouchToGameCoords:(UITouch*)touch;
+
+
 
 @end
 
