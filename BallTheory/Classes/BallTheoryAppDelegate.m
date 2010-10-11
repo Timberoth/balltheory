@@ -139,6 +139,9 @@ CGPoint touchStart;
 	
 	CGPoint delta = CGPointMake((location.x - touchStart.x), (location.y-touchStart.y));
 	
+	delta.x *= -1.0f;
+	delta.y *= -1.0f;
+	
 	// ADJUST CAMERA
 	[mCamera panCameraBy:delta];  // moves it but doesn't draw it yet.
 	
@@ -201,12 +204,28 @@ CGPoint touchStart;
 	cpBody* circle = makeCircle( 5 );
 	circle->p = cpv( location.x, location.y );	
 	
+	
 	// TEST CAMERA ZOOM
+	/*
+	// The two finger multi touch does not work very well.
 	float currentZoom = [mCamera zoom];
-	currentZoom = currentZoom + 0.1;
+	NSSet *allTouches = [event allTouches];
+	int count = [allTouches count];
+	
+	// 1 figner zoom In
+	if ( count == 1 )
+	{
+		currentZoom += 0.1;
+	}
+	
+	// 2+ fingers zoom out
+	else
+	{
+		currentZoom -= 0.1;
+	}
+	
 	mCamera.zoom = currentZoom;
-	
-	
+	 */
 }
 
 
