@@ -40,6 +40,9 @@ GameCamera* mCamera;
 
 CGPoint touchStart;
 
+// Button
+CCLabel* label;
+
 @implementation GameLayer
 -(id) init {
 	[super init];
@@ -337,8 +340,55 @@ CGPoint touchStart;
 @end
 
 
+@implementation MenuLayer
+-(id) init {
+	[super init];
+	
+	//seed the random generator
+	srand([[NSDate date] timeIntervalSince1970]);
+	
+	// Make it look slightly prettier
+	glEnable(GL_LINE_SMOOTH);
+	glEnable(GL_BLEND);
+	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+	glHint(GL_LINE_SMOOTH_HINT, GL_DONT_CARE);
+	
+	
+	// Create label and button
+	CGSize winSize = [[CCDirector sharedDirector] winSize];
+	
+    // Create a label for display purposes
+    label = [[CCLabel labelWithString:@"Last button: None" 
+						   dimensions:CGSizeMake(320, 50) alignment:UITextAlignmentCenter 
+							 fontName:@"Arial" fontSize:32.0] retain];
+    label.position = ccp(winSize.width/2, 
+						 winSize.height-(label.contentSize.height));
+    [self addChild:label];
+	
+    // Standard method to create a button
+    CCMenuItem *starMenuItem = [CCMenuItemImage 
+								itemFromNormalImage:@"ButtonStar.png" selectedImage:@"ButtonStarSel.png" 
+								target:self selector:@selector(starButtonTapped:)];
+    starMenuItem.position = ccp(60, 60);
+    CCMenu *starMenu = [CCMenu menuWithItems:starMenuItem, nil];
+    starMenu.position = CGPointZero;
+    [self addChild:starMenu];
+	
+	return self;
+}
 
+- (void)starButtonTapped:(id)sender {
+    [label setString:@"Last button: *"];
+}
 
+-(void) dealloc {
+	[super dealloc];
+	
+	[label release];
+	label = nil;
+}
+
+@end
 
 
 
@@ -356,6 +406,9 @@ CGPoint touchStart;
 	[[CCDirector sharedDirector] attachInWindow:window];
 	
 	CCScene *scene = [CCScene node];
+	
+	// MenuLayer must be added before GameLayer to render properly.
+	[scene addChild: [MenuLayer node]];
 	[scene addChild: [GameLayer node]];
 	
 	// Initialize GameCamera
