@@ -12,6 +12,7 @@
 #import "cpMouse.h"
 
 
+// GameLayer
 @interface GameLayer : CCLayer {
 	cpMouse* mouse;
 }
@@ -26,10 +27,20 @@
 // Convert to game coordinates.
 -(CGPoint) convertTouchToGameCoords:(UITouch*)touch;
 
+@end
 
+
+
+// MenuLayer
+@interface MenuLayer : CCLayer {
+
+}
 
 @end
 
+
+
+// BallTheoryAppDelegate
 @interface BallTheoryAppDelegate : NSObject <UIAccelerometerDelegate, UIAlertViewDelegate, UITextFieldDelegate, UIApplicationDelegate> {
 	UIWindow *window;
 }
