@@ -43,6 +43,13 @@ CGPoint touchStart;
 // Button
 CCLabel* label;
 
+// Toggle Menu Item
+CCMenuItem* plusItem; 
+CCMenuItem* minusItem;
+
+// Camera Movement Toggle
+bool cameraMovement;
+
 @implementation GameLayer
 -(id) init {
 	[super init];
@@ -146,9 +153,22 @@ CCLabel* label;
 	delta.y *= -1.0f;
 	
 	// ADJUST CAMERA
-	[mCamera panCameraBy:delta];  // moves it but doesn't draw it yet.
-	
+	if( cameraMovement )
+	{
+		[mCamera panCameraBy:delta];  // moves it but doesn't draw it yet.
+	}
+		
 	touchStart = location;  // touchStart is initially set in the ccTouchesBegan method.
+	
+	int count = [touches count];
+	if( count > 1 )
+	{
+		
+		float currentZoom = [mCamera zoom];
+		currentZoom += 0.1;
+		mCamera.zoom = currentZoom;	
+	}
+	
 	
 }
 
@@ -164,9 +184,21 @@ CCLabel* label;
 	// Track where the touch started.
 	touchStart = location;
 	
-	mouse = cpMouseNew(space);
+	//mouse = cpMouseNew(space);
 	//cpMouseMove(mouse, cpv(location.x, location.y));
 	//cpMouseGrab(mouse, 0);
+	
+	// Begin Camera Movment on double tap
+	if( touch.tapCount > 1 )
+	{
+		location = [self convertTouchToGameCoords:touch ];
+		cpBody* circle = makeCircle( 5 );
+		circle->p = cpv( location.x, location.y );
+	}
+	else {
+		cameraMovement = true;
+	}
+
 }
 
 
@@ -181,59 +213,40 @@ CCLabel* label;
 	
 	location = [self convertTouchToGameCoords:touch ];
 	
-	
-	// Spawn new ball
-	/*
-	for( int i = 0; i < 5; i++ )
+	if( !cameraMovement )
 	{
-		cpBody* circle = makeCircle( 5 );
-		circle->p = cpv( location.x, location.y );
-		
-		// Give it a random push
-		int signX = rand()%2;
-		int signY = rand()%2;
-		if( signX == 0 )
+		// Spawn new ball
+		/*
+		for( int i = 0; i < 5; i++ )
 		{
-			signX = -1;
+			cpBody* circle = makeCircle( 5 );
+			circle->p = cpv( location.x, location.y );
+			
+			// Give it a random push
+			int signX = rand()%2;
+			int signY = rand()%2;
+			if( signX == 0 )
+			{
+				signX = -1;
+			}
+			if( signY == 0 )
+			{
+				signY = -1;
+			}
+			cpBodyApplyImpulse( circle, cpv( signX*rand()%150, signY*rand()%150 ), cpvzero);
 		}
-		if( signY == 0 )
-		{
-			signY = -1;
-		}
-		cpBodyApplyImpulse( circle, cpv( signX*rand()%150, signY*rand()%150 ), cpvzero);
-	}
-	 */
-	
-	cpBody* circle = makeCircle( 5 );
-	circle->p = cpv( location.x, location.y );	
-	
-	
-	// TEST CAMERA ZOOM
-	/*
-	// The two finger multi touch does not work very well.
-	float currentZoom = [mCamera zoom];
-	NSSet *allTouches = [event allTouches];
-	int count = [allTouches count];
-	
-	// 1 figner zoom In
-	if ( count == 1 )
-	{
-		currentZoom += 0.1;
+		 */
 	}
 	
-	// 2+ fingers zoom out
-	else
-	{
-		currentZoom -= 0.1;
-	}
-	
-	mCamera.zoom = currentZoom;
-	 */
+	cameraMovement = false;
 }
 
 
 - (void)ccTouchesCancelled:(NSSet *)touches withEvent:(UIEvent *)event {
-	cpMouseDestroy(mouse);
+	
+	//cpMouseDestroy(mouse);
+	
+	cameraMovement = false;
 }
 
 
@@ -242,7 +255,8 @@ CCLabel* label;
 	
 	int steps = 2;
 	cpFloat dt = delta/(cpFloat)steps;
-	for(int i=0; i<steps; i++){
+	for(int i=0; i<steps; i++)
+	{
 		cpSpaceStep(space, dt);
 	}
 	
@@ -270,7 +284,6 @@ CCLabel* label;
 			destroyContainerCap( containerCap );
 			containerCap = NULL;
 		}
-
 	}
 } 
 
@@ -344,6 +357,8 @@ CCLabel* label;
 -(id) init {
 	[super init];
 	
+	cameraMovement = false;
+	
 	//seed the random generator
 	srand([[NSDate date] timeIntervalSince1970]);
 	
@@ -366,19 +381,70 @@ CCLabel* label;
     [self addChild:label];
 	
     // Standard method to create a button
-    CCMenuItem *starMenuItem = [CCMenuItemImage 
+    CCMenuItem* starMenuItem = [CCMenuItemImage 
 								itemFromNormalImage:@"ButtonStar.png" selectedImage:@"ButtonStarSel.png" 
-								target:self selector:@selector(starButtonTapped:)];
+								target:self selector:@selector(zoomOut:)];
     starMenuItem.position = ccp(60, 60);
-    CCMenu *starMenu = [CCMenu menuWithItems:starMenuItem, nil];
-    starMenu.position = CGPointZero;
-    [self addChild:starMenu];
 	
+	CCMenuItem* starMenuItem2 = [CCMenuItemImage 
+								itemFromNormalImage:@"ButtonStar.png" selectedImage:@"ButtonStarSel.png" 
+								target:self selector:@selector(zoomIn:)];
+    starMenuItem2.position = ccp(120, 60);
+	
+	
+    CCMenu *starMenu = [CCMenu menuWithItems:starMenuItem,starMenuItem2, nil];
+    starMenu.position = CGPointZero;
+	[self addChild:starMenu];
+	
+	
+	plusItem = [[CCMenuItemImage itemFromNormalImage:@"ButtonPlus.png" 
+										selectedImage:@"ButtonPlusSel.png" target:nil selector:nil] retain];
+	minusItem = [[CCMenuItemImage itemFromNormalImage:@"ButtonMinus.png" 
+										selectedImage:@"ButtonMinusSel.png" target:nil selector:nil] retain];
+	CCMenuItemToggle* toggleItem = [CCMenuItemToggle itemWithTarget:self 
+														   selector:@selector(plusMinusButtonTapped:) items:plusItem, minusItem, nil];
+	CCMenu *toggleMenu = [CCMenu menuWithItems:toggleItem, nil];
+	toggleMenu.position = ccp(60, 120);
+	[self addChild:toggleMenu];
+		
 	return self;
 }
 
-- (void)starButtonTapped:(id)sender {
-    [label setString:@"Last button: *"];
+- (void)zoomIn:(id)sender 
+{
+	float currentZoom = [mCamera zoom];
+	currentZoom += 0.1;
+	mCamera.zoom = currentZoom;
+}
+
+- (void)zoomOut:(id)sender 
+{
+	
+	float currentZoom = [mCamera zoom];
+	currentZoom -= 0.1;
+	mCamera.zoom = currentZoom;
+}
+
+- (void)plusMinusButtonTapped:(id)sender {  
+	
+	if( cameraMovement )
+	{
+		cameraMovement = false;
+	}
+	else 
+	{
+		cameraMovement = true;
+	}
+
+	
+	/*
+	CCMenuItemToggle* toggleItem = (CCMenuItemToggle*)sender;
+	if (toggleItem.selectedItem == plusItem) {
+		[label setString:@"Visible button: +"];    
+	} else if (toggleItem.selectedItem == minusItem) {
+		[label setString:@"Visible button: -"];
+	} 
+	 */
 }
 
 -(void) dealloc {
@@ -386,6 +452,11 @@ CCLabel* label;
 	
 	[label release];
 	label = nil;
+	
+	[plusItem release];
+	plusItem = nil;
+	[minusItem release];
+	minusItem = nil;
 }
 
 @end
