@@ -117,6 +117,12 @@
 		22963FA71239F0F700A788A3 /* cpMouse.c in Sources */ = {isa = PBXBuildFile; fileRef = 22963FA51239F0F700A788A3 /* cpMouse.c */; };
 		229640521239F59200A788A3 /* DebugRenderer.m in Sources */ = {isa = PBXBuildFile; fileRef = 229640501239F59200A788A3 /* DebugRenderer.m */; };
 		229640531239F59200A788A3 /* Helpers.m in Sources */ = {isa = PBXBuildFile; fileRef = 229640511239F59200A788A3 /* Helpers.m */; };
+		229B7514126C1EB800B4FB45 /* ButtonMinus.png in Resources */ = {isa = PBXBuildFile; fileRef = 229B7510126C1EB800B4FB45 /* ButtonMinus.png */; };
+		229B7515126C1EB800B4FB45 /* ButtonMinusSel.png in Resources */ = {isa = PBXBuildFile; fileRef = 229B7511126C1EB800B4FB45 /* ButtonMinusSel.png */; };
+		229B7516126C1EB800B4FB45 /* ButtonPlus.png in Resources */ = {isa = PBXBuildFile; fileRef = 229B7512126C1EB800B4FB45 /* ButtonPlus.png */; };
+		229B7517126C1EB800B4FB45 /* ButtonPlusSel.png in Resources */ = {isa = PBXBuildFile; fileRef = 229B7513126C1EB800B4FB45 /* ButtonPlusSel.png */; };
+		22EB1BEC126ACB77005A65EC /* ButtonStar.png in Resources */ = {isa = PBXBuildFile; fileRef = 22EB1BEA126ACB77005A65EC /* ButtonStar.png */; };
+		22EB1BED126ACB77005A65EC /* ButtonStarSel.png in Resources */ = {isa = PBXBuildFile; fileRef = 22EB1BEB126ACB77005A65EC /* ButtonStarSel.png */; };
 		22F994FA12615F720092D0F3 /* GameCamera.m in Sources */ = {isa = PBXBuildFile; fileRef = 22F994F912615F720092D0F3 /* GameCamera.m */; };
 		288765FD0DF74451002DB57D /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 288765FC0DF74451002DB57D /* CoreGraphics.framework */; };
 		28AD733F0D9D9553002E5188 /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 28AD733E0D9D9553002E5188 /* MainWindow.xib */; };
@@ -347,6 +353,12 @@
 		22963FA61239F0F700A788A3 /* cpMouse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = cpMouse.h; sourceTree = "<group>"; };
 		229640501239F59200A788A3 /* DebugRenderer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DebugRenderer.m; sourceTree = "<group>"; };
 		229640511239F59200A788A3 /* Helpers.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Helpers.m; sourceTree = "<group>"; };
+		229B7510126C1EB800B4FB45 /* ButtonMinus.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ButtonMinus.png; sourceTree = "<group>"; };
+		229B7511126C1EB800B4FB45 /* ButtonMinusSel.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ButtonMinusSel.png; sourceTree = "<group>"; };
+		229B7512126C1EB800B4FB45 /* ButtonPlus.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ButtonPlus.png; sourceTree = "<group>"; };
+		229B7513126C1EB800B4FB45 /* ButtonPlusSel.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ButtonPlusSel.png; sourceTree = "<group>"; };
+		22EB1BEA126ACB77005A65EC /* ButtonStar.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ButtonStar.png; sourceTree = "<group>"; };
+		22EB1BEB126ACB77005A65EC /* ButtonStarSel.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ButtonStarSel.png; sourceTree = "<group>"; };
 		22F994F812615F720092D0F3 /* GameCamera.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameCamera.h; sourceTree = "<group>"; };
 		22F994F912615F720092D0F3 /* GameCamera.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GameCamera.m; sourceTree = "<group>"; };
 		288765FC0DF74451002DB57D /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -723,6 +735,12 @@
 		29B97317FDCFA39411CA2CEA /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				229B7510126C1EB800B4FB45 /* ButtonMinus.png */,
+				229B7511126C1EB800B4FB45 /* ButtonMinusSel.png */,
+				229B7512126C1EB800B4FB45 /* ButtonPlus.png */,
+				229B7513126C1EB800B4FB45 /* ButtonPlusSel.png */,
+				22EB1BEA126ACB77005A65EC /* ButtonStar.png */,
+				22EB1BEB126ACB77005A65EC /* ButtonStarSel.png */,
 				28AD733E0D9D9553002E5188 /* MainWindow.xib */,
 				8D1107310486CEB800E47090 /* BallTheory-Info.plist */,
 			);
@@ -793,6 +811,12 @@
 			files = (
 				28AD733F0D9D9553002E5188 /* MainWindow.xib in Resources */,
 				22963F1D1239ECC800A788A3 /* CMakeLists.txt in Resources */,
+				22EB1BEC126ACB77005A65EC /* ButtonStar.png in Resources */,
+				22EB1BED126ACB77005A65EC /* ButtonStarSel.png in Resources */,
+				229B7514126C1EB800B4FB45 /* ButtonMinus.png in Resources */,
+				229B7515126C1EB800B4FB45 /* ButtonMinusSel.png in Resources */,
+				229B7516126C1EB800B4FB45 /* ButtonPlus.png in Resources */,
+				229B7517126C1EB800B4FB45 /* ButtonPlusSel.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
