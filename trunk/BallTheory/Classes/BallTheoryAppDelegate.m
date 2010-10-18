@@ -389,7 +389,7 @@ bool cameraMovement;
 	CCMenuItem* starMenuItem2 = [CCMenuItemImage 
 								itemFromNormalImage:@"ButtonStar.png" selectedImage:@"ButtonStarSel.png" 
 								target:self selector:@selector(zoomIn:)];
-    starMenuItem2.position = ccp(120, 60);
+    starMenuItem2.position = ccp(90 , 60);
 	
 	
     CCMenu *starMenu = [CCMenu menuWithItems:starMenuItem,starMenuItem2, nil];
@@ -404,7 +404,7 @@ bool cameraMovement;
 	CCMenuItemToggle* toggleItem = [CCMenuItemToggle itemWithTarget:self 
 														   selector:@selector(plusMinusButtonTapped:) items:plusItem, minusItem, nil];
 	CCMenu *toggleMenu = [CCMenu menuWithItems:toggleItem, nil];
-	toggleMenu.position = ccp(60, 120);
+	toggleMenu.position = ccp(60, 90);
 	[self addChild:toggleMenu];
 		
 	return self;
