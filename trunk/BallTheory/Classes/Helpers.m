@@ -10,10 +10,8 @@
 
 #import "chipmunk.h"
 
-extern cpSpace* space;
-extern cpBody *staticBody;
 
-cpBody* makeCircle(int radius){
+cpBody* makeCircle( cpSpace* space, int radius){
 	int num = 4;
 	cpVect verts[] = {
 		cpv(-radius, -radius),
@@ -37,7 +35,7 @@ cpBody* makeCircle(int radius){
 	return body;
 }
 
-void makeStaticBox(float x, float y, float width, float height){
+void makeStaticBox(cpSpace* space, cpBody* staticBody, float x, float y, float width, float height){
   cpShape * shape;
   shape = cpSegmentShapeNew(staticBody, cpv(x,y), cpv(x+width, y), 0.0f);
   shape->e = 1.0; shape->u = 1.0;
@@ -57,82 +55,8 @@ void makeStaticBox(float x, float y, float width, float height){
 }
 
 
-void  createPlayer () {  
-  cpShape * shape;
-	int num = 4;
-  int kColl_Player = 55;
-  cpFloat chestMass = 15;
-	cpVect verts[] = {
-		cpv(-8,-12),
-		cpv(-8, 12),
-		cpv( 8, 12),
-		cpv( 8,-12),
-	};
-	
-	cpBody * playerChest = cpBodyNew(10.0, cpMomentForPoly(chestMass, num, verts, cpv(0,0)));
-	cpSpaceAddBody(space, playerChest);
-	shape = cpPolyShapeNew(playerChest, num, verts, cpv(0,0));
-	shape->e = 0.0; shape->u = 1.0;
-  shape->group = kColl_Player;
-  playerChest ->p = cpv(160,240);
-	cpSpaceAddShape(space, shape);
-	
-	cpFloat radius = 10;
-	cpFloat head_mass = 0.01;
-  cpVect offset = cpv(0, 12);
-	cpBody *playerHead = cpBodyNew(head_mass, cpMomentForCircle(head_mass, 0.0, radius, cpvzero));
-	playerHead->p = cpvadd(playerChest->p, offset);
-	playerHead->v = playerChest->v;
-	cpSpaceAddBody(space, playerHead);
-	shape = cpCircleShapeNew(playerHead, radius, cpvzero);
-	shape->e = 0.0; shape->u = 2.5;
-  shape->collision_type = kColl_Player;
-  shape->group = kColl_Player;
-	cpSpaceAddShape(space, shape);
-  // apply a small upwards force to keep the head up,
-  // this may need adjusting when/if gravity is changed.
-  
-  // plus this adds an awesome drunkard swagger!
-	cpBodyApplyForce(playerHead, cpv(0, 10), cpvzero);
-  cpJoint *joint;
-	joint = cpPinJointNew(playerChest, playerHead, cpv(0, 10), cpv(0, -5));
-	cpSpaceAddJoint(space, joint);
-  
-  cpVect armverts[] = {
-		cpv(-6,-2),
-		cpv(-6, 2),
-		cpv( 6, 2),
-		cpv( 6,-2),
-	};
-  
-  cpBody * playerArm1 = cpBodyNew(0.1, cpMomentForPoly(0.1, num, armverts, cpv(0,0)));
-  cpSpaceAddBody(space, playerArm1);
-	shape = cpPolyShapeNew(playerArm1, num, armverts, cpv(0,0));
-  shape->collision_type = kColl_Player;
-	shape->e = 0.0; shape->u = 1.0;
-  shape->group = kColl_Player;
-  playerArm1 ->p = cpv(160,240);
-	cpSpaceAddShape(space, shape);
-  joint = cpPinJointNew(playerChest, playerArm1, cpv(5, 0), cpv(5,0));
-	cpSpaceAddJoint(space, joint);
-  
-  cpBody * playerArm2= cpBodyNew(0.1, cpMomentForPoly(0.1, num, armverts, cpv(0,0)));
-  cpSpaceAddBody(space, playerArm2);
-	shape = cpPolyShapeNew(playerArm2, num, armverts, cpv(0,0));
-  shape->collision_type = kColl_Player;
-	shape->e = 0.0; shape->u = 1.0;
-  shape->group = kColl_Player;
-  
-  playerArm2 ->p = cpv(160,240);
-	cpSpaceAddShape(space, shape);
-  joint = cpPinJointNew(playerChest, playerArm2, cpv(-5, 3), cpv(-5, 3));
-	cpSpaceAddJoint(space, joint);
-  
-}
-
-
 // x and y is the top left vertex
-NSMutableArray* createContainer( float x, float y ) 
+NSMutableArray* createContainer( cpSpace* space, cpBody* staticBody, float x, float y ) 
 {  
 	// Create empty array for shapes
 	NSMutableArray  *shapes = [[NSMutableArray alloc] init];
@@ -186,7 +110,7 @@ NSMutableArray* createContainer( float x, float y )
 }
 
 
-void destroyContainer( NSMutableArray* container )
+void destroyContainer( cpSpace* space, NSMutableArray* container )
 {
 	if( !container )
 		return;
@@ -204,7 +128,7 @@ void destroyContainer( NSMutableArray* container )
 }
 
 
-cpBody* createSpinner( float x, float y )
+cpBody* createSpinner( cpSpace* space, cpBody* staticBody, float x, float y )
 {
 	int num = 4;
 	int width = 85.0;
@@ -244,7 +168,7 @@ void destroySpinner( cpBody* spinner )
 }
 
 
-cpShape* createContainerCap( float x, float y )
+cpShape* createContainerCap( cpSpace* space, cpBody* staticBody, float x, float y )
 {
 	float scale = 1.5;
 	float w = 20.0f * scale;
@@ -264,7 +188,7 @@ cpShape* createContainerCap( float x, float y )
 	return shape;
 }
 
-void destroyContainerCap( cpShape *containerCap )
+void destroyContainerCap( cpSpace* space, cpShape *containerCap )
 {
 	cpSpaceRemoveStaticShape( space, containerCap );
 	cpShapeFree( containerCap );
