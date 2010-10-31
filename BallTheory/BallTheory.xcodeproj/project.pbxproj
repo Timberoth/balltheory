@@ -121,6 +121,16 @@
 		229B7515126C1EB800B4FB45 /* ButtonMinusSel.png in Resources */ = {isa = PBXBuildFile; fileRef = 229B7511126C1EB800B4FB45 /* ButtonMinusSel.png */; };
 		229B7516126C1EB800B4FB45 /* ButtonPlus.png in Resources */ = {isa = PBXBuildFile; fileRef = 229B7512126C1EB800B4FB45 /* ButtonPlus.png */; };
 		229B7517126C1EB800B4FB45 /* ButtonPlusSel.png in Resources */ = {isa = PBXBuildFile; fileRef = 229B7513126C1EB800B4FB45 /* ButtonPlusSel.png */; };
+		22B03CF9127DE7CF00B5CDE6 /* GameplayScene.m in Sources */ = {isa = PBXBuildFile; fileRef = 22B03CF8127DE7CF00B5CDE6 /* GameplayScene.m */; };
+		22B03CFC127DE7E700B5CDE6 /* MainMenuScene.m in Sources */ = {isa = PBXBuildFile; fileRef = 22B03CFB127DE7E700B5CDE6 /* MainMenuScene.m */; };
+		22B03CFF127DE7FD00B5CDE6 /* LevelSelectScene.m in Sources */ = {isa = PBXBuildFile; fileRef = 22B03CFE127DE7FD00B5CDE6 /* LevelSelectScene.m */; };
+		22B03D06127DE8EC00B5CDE6 /* CreditsScene.m in Sources */ = {isa = PBXBuildFile; fileRef = 22B03D05127DE8EC00B5CDE6 /* CreditsScene.m */; };
+		22B03D0A127DE91300B5CDE6 /* CommonScene.m in Sources */ = {isa = PBXBuildFile; fileRef = 22B03D09127DE91300B5CDE6 /* CommonScene.m */; };
+		22B03D1B127DF11400B5CDE6 /* SceneManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 22B03D1A127DF11400B5CDE6 /* SceneManager.m */; };
+		22B03D20127E080C00B5CDE6 /* GameObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 22B03D1F127E080C00B5CDE6 /* GameObject.m */; };
+		22B03DB3127E158300B5CDE6 /* GameplayGameLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 22B03DB2127E158300B5CDE6 /* GameplayGameLayer.m */; };
+		22B03DB6127E159E00B5CDE6 /* GameplayUILayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 22B03DB5127E159E00B5CDE6 /* GameplayUILayer.m */; };
+		22B03DB9127E15C500B5CDE6 /* CommonLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 22B03DB8127E15C500B5CDE6 /* CommonLayer.m */; };
 		22EB1BEC126ACB77005A65EC /* ButtonStar.png in Resources */ = {isa = PBXBuildFile; fileRef = 22EB1BEA126ACB77005A65EC /* ButtonStar.png */; };
 		22EB1BED126ACB77005A65EC /* ButtonStarSel.png in Resources */ = {isa = PBXBuildFile; fileRef = 22EB1BEB126ACB77005A65EC /* ButtonStarSel.png */; };
 		22F994FA12615F720092D0F3 /* GameCamera.m in Sources */ = {isa = PBXBuildFile; fileRef = 22F994F912615F720092D0F3 /* GameCamera.m */; };
@@ -357,6 +367,26 @@
 		229B7511126C1EB800B4FB45 /* ButtonMinusSel.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ButtonMinusSel.png; sourceTree = "<group>"; };
 		229B7512126C1EB800B4FB45 /* ButtonPlus.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ButtonPlus.png; sourceTree = "<group>"; };
 		229B7513126C1EB800B4FB45 /* ButtonPlusSel.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ButtonPlusSel.png; sourceTree = "<group>"; };
+		22B03CF7127DE7CF00B5CDE6 /* GameplayScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameplayScene.h; sourceTree = "<group>"; };
+		22B03CF8127DE7CF00B5CDE6 /* GameplayScene.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GameplayScene.m; sourceTree = "<group>"; };
+		22B03CFA127DE7E700B5CDE6 /* MainMenuScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainMenuScene.h; sourceTree = "<group>"; };
+		22B03CFB127DE7E700B5CDE6 /* MainMenuScene.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainMenuScene.m; sourceTree = "<group>"; };
+		22B03CFD127DE7FD00B5CDE6 /* LevelSelectScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LevelSelectScene.h; sourceTree = "<group>"; };
+		22B03CFE127DE7FD00B5CDE6 /* LevelSelectScene.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LevelSelectScene.m; sourceTree = "<group>"; };
+		22B03D04127DE8EC00B5CDE6 /* CreditsScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CreditsScene.h; sourceTree = "<group>"; };
+		22B03D05127DE8EC00B5CDE6 /* CreditsScene.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CreditsScene.m; sourceTree = "<group>"; };
+		22B03D08127DE91300B5CDE6 /* CommonScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommonScene.h; sourceTree = "<group>"; };
+		22B03D09127DE91300B5CDE6 /* CommonScene.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CommonScene.m; sourceTree = "<group>"; };
+		22B03D19127DF11400B5CDE6 /* SceneManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SceneManager.h; sourceTree = "<group>"; };
+		22B03D1A127DF11400B5CDE6 /* SceneManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SceneManager.m; sourceTree = "<group>"; };
+		22B03D1E127E080C00B5CDE6 /* GameObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameObject.h; sourceTree = "<group>"; };
+		22B03D1F127E080C00B5CDE6 /* GameObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GameObject.m; sourceTree = "<group>"; };
+		22B03DB1127E158300B5CDE6 /* GameplayGameLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameplayGameLayer.h; sourceTree = "<group>"; };
+		22B03DB2127E158300B5CDE6 /* GameplayGameLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GameplayGameLayer.m; sourceTree = "<group>"; };
+		22B03DB4127E159E00B5CDE6 /* GameplayUILayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameplayUILayer.h; sourceTree = "<group>"; };
+		22B03DB5127E159E00B5CDE6 /* GameplayUILayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GameplayUILayer.m; sourceTree = "<group>"; };
+		22B03DB7127E15C500B5CDE6 /* CommonLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommonLayer.h; sourceTree = "<group>"; };
+		22B03DB8127E15C500B5CDE6 /* CommonLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CommonLayer.m; sourceTree = "<group>"; };
 		22EB1BEA126ACB77005A65EC /* ButtonStar.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ButtonStar.png; sourceTree = "<group>"; };
 		22EB1BEB126ACB77005A65EC /* ButtonStarSel.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ButtonStarSel.png; sourceTree = "<group>"; };
 		22F994F812615F720092D0F3 /* GameCamera.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameCamera.h; sourceTree = "<group>"; };
@@ -388,13 +418,14 @@
 		080E96DDFE201D6D7F000001 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
-				229640501239F59200A788A3 /* DebugRenderer.m */,
+				2298A48D127C9A6E0029F9AA /* UI */,
+				2298A48B127C9A240029F9AA /* Physics */,
+				2298A48A127C9A180029F9AA /* Render */,
+				2298A489127C99FF0029F9AA /* Object */,
 				229640511239F59200A788A3 /* Helpers.m */,
 				22963FA31239F0B300A788A3 /* Chipmunk Edits */,
 				1D3623240D0F684500981E51 /* BallTheoryAppDelegate.h */,
 				1D3623250D0F684500981E51 /* BallTheoryAppDelegate.m */,
-				22F994F812615F720092D0F3 /* GameCamera.h */,
-				22F994F912615F720092D0F3 /* GameCamera.m */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -710,6 +741,97 @@
 			name = "Chipmunk Edits";
 			sourceTree = "<group>";
 		};
+		2298A489127C99FF0029F9AA /* Object */ = {
+			isa = PBXGroup;
+			children = (
+				22B03D1E127E080C00B5CDE6 /* GameObject.h */,
+				22B03D1F127E080C00B5CDE6 /* GameObject.m */,
+			);
+			name = Object;
+			sourceTree = "<group>";
+		};
+		2298A48A127C9A180029F9AA /* Render */ = {
+			isa = PBXGroup;
+			children = (
+				22F994F812615F720092D0F3 /* GameCamera.h */,
+				22F994F912615F720092D0F3 /* GameCamera.m */,
+				229640501239F59200A788A3 /* DebugRenderer.m */,
+			);
+			name = Render;
+			sourceTree = "<group>";
+		};
+		2298A48B127C9A240029F9AA /* Physics */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Physics;
+			sourceTree = "<group>";
+		};
+		2298A48D127C9A6E0029F9AA /* UI */ = {
+			isa = PBXGroup;
+			children = (
+				22B03D07127DE8F500B5CDE6 /* Common */,
+				22B03D03127DE8D700B5CDE6 /* Credits */,
+				22B03D01127DE83000B5CDE6 /* MainMenu */,
+				22B03D00127DE80E00B5CDE6 /* Gameplay */,
+				22B03D02127DE8AE00B5CDE6 /* LevelSelect */,
+			);
+			name = UI;
+			sourceTree = "<group>";
+		};
+		22B03D00127DE80E00B5CDE6 /* Gameplay */ = {
+			isa = PBXGroup;
+			children = (
+				22B03CF7127DE7CF00B5CDE6 /* GameplayScene.h */,
+				22B03CF8127DE7CF00B5CDE6 /* GameplayScene.m */,
+				22B03DB1127E158300B5CDE6 /* GameplayGameLayer.h */,
+				22B03DB2127E158300B5CDE6 /* GameplayGameLayer.m */,
+				22B03DB4127E159E00B5CDE6 /* GameplayUILayer.h */,
+				22B03DB5127E159E00B5CDE6 /* GameplayUILayer.m */,
+			);
+			name = Gameplay;
+			sourceTree = "<group>";
+		};
+		22B03D01127DE83000B5CDE6 /* MainMenu */ = {
+			isa = PBXGroup;
+			children = (
+				22B03CFA127DE7E700B5CDE6 /* MainMenuScene.h */,
+				22B03CFB127DE7E700B5CDE6 /* MainMenuScene.m */,
+			);
+			name = MainMenu;
+			sourceTree = "<group>";
+		};
+		22B03D02127DE8AE00B5CDE6 /* LevelSelect */ = {
+			isa = PBXGroup;
+			children = (
+				22B03CFD127DE7FD00B5CDE6 /* LevelSelectScene.h */,
+				22B03CFE127DE7FD00B5CDE6 /* LevelSelectScene.m */,
+			);
+			name = LevelSelect;
+			sourceTree = "<group>";
+		};
+		22B03D03127DE8D700B5CDE6 /* Credits */ = {
+			isa = PBXGroup;
+			children = (
+				22B03D04127DE8EC00B5CDE6 /* CreditsScene.h */,
+				22B03D05127DE8EC00B5CDE6 /* CreditsScene.m */,
+			);
+			name = Credits;
+			sourceTree = "<group>";
+		};
+		22B03D07127DE8F500B5CDE6 /* Common */ = {
+			isa = PBXGroup;
+			children = (
+				22B03D08127DE91300B5CDE6 /* CommonScene.h */,
+				22B03D09127DE91300B5CDE6 /* CommonScene.m */,
+				22B03D19127DF11400B5CDE6 /* SceneManager.h */,
+				22B03D1A127DF11400B5CDE6 /* SceneManager.m */,
+				22B03DB7127E15C500B5CDE6 /* CommonLayer.h */,
+				22B03DB8127E15C500B5CDE6 /* CommonLayer.m */,
+			);
+			name = Common;
+			sourceTree = "<group>";
+		};
 		29B97314FDCFA39411CA2CEA /* CustomTemplate */ = {
 			isa = PBXGroup;
 			children = (
@@ -932,6 +1054,16 @@
 				229587C71260DCA500C29D28 /* ZAttributedString.m in Sources */,
 				229587C81260DCA500C29D28 /* ZFont.m in Sources */,
 				22F994FA12615F720092D0F3 /* GameCamera.m in Sources */,
+				22B03CF9127DE7CF00B5CDE6 /* GameplayScene.m in Sources */,
+				22B03CFC127DE7E700B5CDE6 /* MainMenuScene.m in Sources */,
+				22B03CFF127DE7FD00B5CDE6 /* LevelSelectScene.m in Sources */,
+				22B03D06127DE8EC00B5CDE6 /* CreditsScene.m in Sources */,
+				22B03D0A127DE91300B5CDE6 /* CommonScene.m in Sources */,
+				22B03D1B127DF11400B5CDE6 /* SceneManager.m in Sources */,
+				22B03D20127E080C00B5CDE6 /* GameObject.m in Sources */,
+				22B03DB3127E158300B5CDE6 /* GameplayGameLayer.m in Sources */,
+				22B03DB6127E159E00B5CDE6 /* GameplayUILayer.m in Sources */,
+				22B03DB9127E15C500B5CDE6 /* CommonLayer.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

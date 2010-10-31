@@ -2,47 +2,30 @@
 //  BallTheoryAppDelegate.h
 //  BallTheory
 //
-//  Created by Tim on 9/7/10.
-//  Copyright __MyCompanyName__ 2010. All rights reserved.
+//  Created by Timothy Lambert on 10/31/10.
+//  Copyright 2010 Gamers of Action. All rights reserved.
 //
 
 #import <UIKit/UIKit.h>
+
+// Cocos2d
 #import "cocos2d.h"
-#import "CCLayer.h"
-#import "cpMouse.h"
 
-
-// GameLayer
-@interface GameLayer : CCLayer {
-	cpMouse* mouse;
-}
-
-- (void) initChipmunk;
-
-
-// as cancelled and up do the same thing
-- (void)ccTouchesCancelled:(NSSet *)touches withEvent:(UIEvent *)event;
-
-
-// Convert to game coordinates.
--(CGPoint) convertTouchToGameCoords:(UITouch*)touch;
-
-@end
-
-
-
-// MenuLayer
-@interface MenuLayer : CCLayer {
-
-}
-
-@end
-
+// Ball Theory
+#import "SceneManager.h"
 
 
 // BallTheoryAppDelegate
 @interface BallTheoryAppDelegate : NSObject <UIAccelerometerDelegate, UIAlertViewDelegate, UITextFieldDelegate, UIApplicationDelegate> {
+	
+	// Pointer to the application window
 	UIWindow *window;
+	
+	
+	// SceneManager
+	SceneManager* mSceneManager;
+	
+	//
 }
 
 @end
