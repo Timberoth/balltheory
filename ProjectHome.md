@@ -1,0 +1,1 @@
+Simple puzzle game that helps teach players about simple programming logic concepts.
